@@ -1,0 +1,25 @@
+# depslib dependency file v1.0
+1356925610 source:d:\isjhar\it telkom\kuliah\semester 3\algoritma dan struktur data\praktikum\tubes\solitaire\main.cpp
+	"file.h"
+
+1356878103 d:\isjhar\it telkom\kuliah\semester 3\algoritma dan struktur data\praktikum\tubes\solitaire\file.h
+	<stdio.h>
+	<conio.h>
+	<string.h>
+	<stdlib.h>
+
+1356921063 source:d:\isjhar\it telkom\kuliah\semester 3\algoritma dan struktur data\praktikum\tubes\solitaire\file.cpp
+	"file.h"
+
+1356921063 source:d:\isjhar\portofolio\solitaire\project\file.cpp
+	"file.h"
+
+1356878103 d:\isjhar\portofolio\solitaire\project\file.h
+	<stdio.h>
+	<conio.h>
+	<string.h>
+	<stdlib.h>
+
+1356925610 source:d:\isjhar\portofolio\solitaire\project\main.cpp
+	"file.h"
+
