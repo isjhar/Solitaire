@@ -8,12 +8,14 @@ queue q;
 telmkartu x;
 char y,z;
 int pil;
+infotype hand;
 
 
 int main(){
     /*createtumpukan(&deck);
     shufflecard(&deck);
     shufflecard(&deck);*/
+    srand(time(NULL));
     while (pil!=3){
         y='w';
         if (pil!=2){

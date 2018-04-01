@@ -61,25 +61,27 @@ int isEmptyQueue(queue q){
         return 0;
     }
 }
+
 void shufflecard (tumpukan *lama){
     tumpukan baru;
     int k;
     int n = 52;
-
-    for (k=n-1; k>=0; k--){
-        if (k % 2 == 1) {
-            baru[(n-k-1)/2].info.angka = (*lama)[k].info.angka;
-            baru[(n-k-1)/2].info.bunga = (*lama)[k].info.bunga;
-        } else if (k%2 == 0) {
-            baru[(k/2)+n/2].info.angka = (*lama)[k].info.angka;
-            baru[(k/2)+n/2].info.bunga = (*lama)[k].info.bunga;
+    int shuffleCount = rand() % 100 + 1;
+    for(int l=0; l<shuffleCount; l++){
+        for (k=n-1; k>=0; k--){
+            if (k % 2 == 1) {
+                baru[(n-k-1)/2].info.angka = (*lama)[k].info.angka;
+                baru[(n-k-1)/2].info.bunga = (*lama)[k].info.bunga;
+            } else if (k%2 == 0) {
+                baru[(k/2)+n/2].info.angka = (*lama)[k].info.angka;
+                baru[(k/2)+n/2].info.bunga = (*lama)[k].info.bunga;
+            }
+        }
+        for (k=0;k<=n;k++){
+            (*lama)[k].info.angka = baru[k].info.angka;
+            (*lama)[k].info.bunga = baru[k].info.bunga;
         }
     }
-    for (k=0;k<=n;k++){
-        (*lama)[k].info.angka = baru[k].info.angka;
-        (*lama)[k].info.bunga = baru[k].info.bunga;
-    }
-
 }
 
 void push (stack *s, telmkartu x){

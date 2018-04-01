@@ -4,6 +4,7 @@
 #include <conio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <time.h>
 
 typedef struct {
     int bunga;
@@ -56,6 +57,10 @@ void tukar (part *s,part2 *t, queue *q, int x, int y);
 int onlyking (part s, queue q, telmkartu x, int y);
 int onlyAs (part2 s, telmkartu x, int y);
 int gamefinish (part2 x);
-
+char* bungaToString(int bunga);
+infotype getHand(part *s, char key);
+void printHand(infotype hand);
+char intToInputKey(int i);
+char intToInputKeyDeck(int i);
 
 #endif // FILE_H_INCLUDED
