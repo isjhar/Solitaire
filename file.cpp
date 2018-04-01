@@ -190,6 +190,12 @@ void view (part s,part2 t, queue q){
         }
         printf("\n");
     }
+
+    printf("\nH : Heart");
+    printf("\nD : Diamond");
+    printf("\nC : Clove");
+    printf("\nS : Spade");
+    printf("\n\n");
 }
 
 int konfersitoangka (char x){
@@ -381,9 +387,9 @@ int gamefinish (part2 x){
 char* bungaToString(int bunga){
     switch(bunga){
     case 3:
-        return "B";
+        return ANSI_COLOR_RED "H" ANSI_COLOR_RESET;
     case 4:
-        return "D";
+        return ANSI_COLOR_RED "D" ANSI_COLOR_RESET;
     case 5:
         return "C";
     case 6:
