@@ -61,25 +61,27 @@ int isEmptyQueue(queue q){
         return 0;
     }
 }
+
 void shufflecard (tumpukan *lama){
     tumpukan baru;
     int k;
     int n = 52;
-
-    for (k=n-1; k>=0; k--){
-        if (k % 2 == 1) {
-            baru[(n-k-1)/2].info.angka = (*lama)[k].info.angka;
-            baru[(n-k-1)/2].info.bunga = (*lama)[k].info.bunga;
-        } else if (k%2 == 0) {
-            baru[(k/2)+n/2].info.angka = (*lama)[k].info.angka;
-            baru[(k/2)+n/2].info.bunga = (*lama)[k].info.bunga;
+    int shuffleCount = rand() % 100 + 1;
+    for(int l=0; l<shuffleCount; l++){
+        for (k=n-1; k>=0; k--){
+            if (k % 2 == 1) {
+                baru[(n-k-1)/2].info.angka = (*lama)[k].info.angka;
+                baru[(n-k-1)/2].info.bunga = (*lama)[k].info.bunga;
+            } else if (k%2 == 0) {
+                baru[(k/2)+n/2].info.angka = (*lama)[k].info.angka;
+                baru[(k/2)+n/2].info.bunga = (*lama)[k].info.bunga;
+            }
+        }
+        for (k=0;k<=n;k++){
+            (*lama)[k].info.angka = baru[k].info.angka;
+            (*lama)[k].info.bunga = baru[k].info.bunga;
         }
     }
-    for (k=0;k<=n;k++){
-        (*lama)[k].info.angka = baru[k].info.angka;
-        (*lama)[k].info.bunga = baru[k].info.bunga;
-    }
-
 }
 
 void push (stack *s, telmkartu x){
@@ -153,13 +155,13 @@ void setkartu (part *s,tumpukan x,queue *q){
 void view (part s,part2 t, queue q){
     int i,j,k;
     for (i=0;i<7;i++){
-        printf("%d : ",i+1);
+        printf("%d (%c) : ",i+1, intToInputKey(i));
         for(j=0;j<=s[i].top;j++){
             if (j==s[i].top){
                 s[i].kartu[j].status=1;
             }
             if (s[i].kartu[j].status==1){
-                printf("%c%c  ",s[i].kartu[j].info.angka,s[i].kartu[j].info.bunga);
+                printf("%c%s ",s[i].kartu[j].info.angka,bungaToString(s[i].kartu[j].info.bunga));
             } else {
                 printf("**  ");
             }
@@ -167,7 +169,7 @@ void view (part s,part2 t, queue q){
         printf("\n");
     }
     k=q.tail;
-    printf("\ndeck : \n");
+    printf("\ndeck (a) : \n");
 
     if (isEmptyQueue(q)!=1){
         q.kartu[q.head].status = 1;
@@ -175,19 +177,25 @@ void view (part s,part2 t, queue q){
             if (q.kartu[k].status == 0){
                 printf("**  ");
             } else {
-                printf("%c%c  ",q.kartu[k].info.angka,q.kartu[k].info.bunga);
+                printf("%c%s  ",q.kartu[k].info.angka,bungaToString(q.kartu[k].info.bunga));
             }
             k--;
         }
     }
     printf("\n\n");
     for (i=0;i<4;i++){
-        printf("Deck %d : ",i+1);
+        printf("Deck %d (%c) : ",i+1,intToInputKeyDeck(i));
         for (j=0;j<=t[i].top;j++){
-            printf("%c%c  ",t[i].kartu[j].info.angka,t[i].kartu[j].info.bunga);
+            printf("%c%s  ",t[i].kartu[j].info.angka,bungaToString(t[i].kartu[j].info.bunga));
         }
         printf("\n");
     }
+
+    printf("\nH : Heart");
+    printf("\nD : Diamond");
+    printf("\nC : Clove");
+    printf("\nS : Spade");
+    printf("\n\n");
 }
 
 int konfersitoangka (char x){
@@ -376,4 +384,72 @@ int gamefinish (part2 x){
     }
 }
 
+char* bungaToString(int bunga){
+    switch(bunga){
+    case 3:
+        return ANSI_COLOR_RED "H" ANSI_COLOR_RESET;
+    case 4:
+        return ANSI_COLOR_RED "D" ANSI_COLOR_RESET;
+    case 5:
+        return "C";
+    case 6:
+        return "S";
+    }
+    return "undefinied";
+}
 
+infotype getHand(part *s, part2 t, queue q, char key){
+    switch (key){
+        case 'z' : return (*s)[0].kartu[(*s)[0].top].info;
+        case 'x' : return (*s)[1].kartu[(*s)[1].top].info;
+        case 'c' : return (*s)[2].kartu[(*s)[2].top].info;
+        case 'v' : return (*s)[3].kartu[(*s)[3].top].info;
+        case 'b' : return (*s)[4].kartu[(*s)[4].top].info;
+        case 'n' : return (*s)[5].kartu[(*s)[5].top].info;
+        case 'm' : return (*s)[6].kartu[(*s)[6].top].info;
+        case 'a' :
+            if(isEmptyQueue(q)!=1)
+                return q.kartu[q.head].info;
+            break;
+        case 's' : return (t)[0].kartu[(t)[0].top].info;
+        case 'd' : return (t)[1].kartu[(t)[1].top].info;
+        case 'f' : return (t)[2].kartu[(t)[2].top].info;
+        case 'g' : return (t)[3].kartu[(t)[3].top].info;
+
+    }
+    infotype hand;
+    hand.angka=NULL;
+    hand.bunga=NULL;
+    return hand;
+}
+
+void printHand(infotype hand){
+    if(hand.angka == NULL){
+        printf("\nHand : null");
+        return;
+    }
+    printf("\nHand : %c%s",hand.angka,bungaToString(hand.bunga));
+}
+
+char intToInputKey(int i){
+    switch (i){
+        case 0 : return 'z';
+        case 1 : return 'x';
+        case 2 : return 'c';
+        case 3 : return 'v';
+        case 4 : return 'b';
+        case 5 : return 'n';
+        case 6 : return 'm';
+    }
+    return '0';
+}
+
+char intToInputKeyDeck(int i){
+    switch (i){
+        case 0 : return 's';
+        case 1 : return 'd';
+        case 2 : return 'f';
+        case 3 : return 'g';
+    }
+    return '0';
+}
