@@ -11,15 +11,16 @@
 1356921063 source:d:\isjhar\it telkom\kuliah\semester 3\algoritma dan struktur data\praktikum\tubes\solitaire\file.cpp
 	"file.h"
 
-1356921063 source:d:\isjhar\portofolio\solitaire\project\file.cpp
+1522587275 source:d:\isjhar\portofolio\solitaire\project\file.cpp
 	"file.h"
 
-1356878103 d:\isjhar\portofolio\solitaire\project\file.h
+1522588014 d:\isjhar\portofolio\solitaire\project\file.h
 	<stdio.h>
 	<conio.h>
 	<string.h>
 	<stdlib.h>
+	<time.h>
 
-1356925610 source:d:\isjhar\portofolio\solitaire\project\main.cpp
+1522585986 source:d:\isjhar\portofolio\solitaire\project\main.cpp
 	"file.h"
 

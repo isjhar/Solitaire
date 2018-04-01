@@ -8,12 +8,14 @@ queue q;
 telmkartu x;
 char y,z;
 int pil;
+infotype hand;
 
 
 int main(){
     /*createtumpukan(&deck);
     shufflecard(&deck);
     shufflecard(&deck);*/
+    srand(time(NULL));
     while (pil!=3){
         y='w';
         if (pil!=2){
@@ -23,7 +25,7 @@ int main(){
             createemptyqueue(&q);
         }
         system("cls");
-        printf("-----Game Solitaire-----");
+        printf("-----Game Solitaire-----2");
         printf("\n1. Main");
         printf("\n2. Shuffle Card");
         printf("\n3. Exit");
@@ -36,6 +38,8 @@ int main(){
                     system("cls");
                     view(s,t,q);
                     y=getch();
+                    hand=getHand(&s,t,q,y);
+                    printHand(hand);
                     z=getch();
                     hand1=konfersitoangka(y);
                     hand2=konfersitoangka(z);
