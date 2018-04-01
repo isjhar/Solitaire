@@ -58,7 +58,7 @@ int onlyking (part s, queue q, telmkartu x, int y);
 int onlyAs (part2 s, telmkartu x, int y);
 int gamefinish (part2 x);
 char* bungaToString(int bunga);
-infotype getHand(part *s, char key);
+infotype getHand(part *s, part2 t, queue q, char key);
 void printHand(infotype hand);
 char intToInputKey(int i);
 char intToInputKeyDeck(int i);
